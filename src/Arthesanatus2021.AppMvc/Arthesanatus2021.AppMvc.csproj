@@ -252,6 +252,16 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arthesanatus2021.Business\Arthesanatus2021.Business.csproj">
+      <Project>{b6161b03-4fb6-4afb-98bf-4dbfa190e486}</Project>
+      <Name>Arthesanatus2021.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arthesanatus2021.Infra\Arthesanatus2021.Infra.csproj">
+      <Project>{8583a812-5eb7-41d0-9c6f-9ca876627080}</Project>
+      <Name>Arthesanatus2021.Infra</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
