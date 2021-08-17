@@ -34,6 +34,8 @@ namespace Arthesanatus2021.Infra.Data.Mappings
             HasRequired(rec => rec.Revista)
                 .WithMany(rev => rev.Receitas)
                 .HasForeignKey(rec => rec.RevistaId);
+
+            ToTable("RECEITAS");
         }
     }
 }
