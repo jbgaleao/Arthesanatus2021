@@ -34,7 +34,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Models\Entity.cs" />
+    <Compile Include="Models\Receitas\Receita.cs" />
+    <Compile Include="Models\Revistas\Mes.cs" />
+    <Compile Include="Models\Revistas\Revista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
