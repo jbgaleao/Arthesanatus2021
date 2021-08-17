@@ -1,5 +1,6 @@
 ﻿using Arthesanatus2021.Business.Core.Models;
 using Arthesanatus2021.Business.Models.Receitas;
+
 using System.Collections.Generic;
 
 namespace Arthesanatus2021.Business.Models.Revistas

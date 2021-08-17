@@ -34,8 +34,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Models\Entity.cs" />
+    <Compile Include="Models\Receitas\IReceitaRepository.cs" />
     <Compile Include="Models\Receitas\Receita.cs" />
+    <Compile Include="Models\Revistas\IRevistaRepository.cs" />
     <Compile Include="Models\Revistas\Mes.cs" />
     <Compile Include="Models\Revistas\Revista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
