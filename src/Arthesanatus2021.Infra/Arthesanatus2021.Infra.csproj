@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Context\Arthesanatus2021Context.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Data\Mappings\ReceitaMap.cs" />
+    <Compile Include="Data\Mappings\RevistaMap.cs" />
+    <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
