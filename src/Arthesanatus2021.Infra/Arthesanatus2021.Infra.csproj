@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Context\Arthesanatus2021Context.cs" />
+    <Compile Include="Data\Mappings\CorMap.cs" />
+    <Compile Include="Data\Mappings\LinhaMap.cs" />
     <Compile Include="Data\Mappings\ReceitaMap.cs" />
     <Compile Include="Data\Mappings\RevistaMap.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />

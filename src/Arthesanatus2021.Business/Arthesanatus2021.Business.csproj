@@ -36,6 +36,10 @@
   <ItemGroup>
     <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Models\Entity.cs" />
+    <Compile Include="Models\Cores\Cor.cs" />
+    <Compile Include="Models\Cores\ICorRepository.cs" />
+    <Compile Include="Models\Linhas\ILinhaRepository.cs" />
+    <Compile Include="Models\Linhas\Linha.cs" />
     <Compile Include="Models\Receitas\IReceitaRepository.cs" />
     <Compile Include="Models\Receitas\Receita.cs" />
     <Compile Include="Models\Revistas\IRevistaRepository.cs" />

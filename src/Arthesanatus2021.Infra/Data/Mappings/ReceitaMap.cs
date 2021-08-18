@@ -32,10 +32,22 @@ namespace Arthesanatus2021.Infra.Data.Mappings
                 .HasMaxLength(2000);
 
             HasRequired(rec => rec.Revista)
-                .WithMany(rev => rev.Receitas)
+                .WithMany(rev => rev.ListaReceitas)
                 .HasForeignKey(rec => rec.RevistaId);
 
-            ToTable("RECEITAS");
+            
+            HasMany(rec => rec.ListaLinhas)     // Receita tem uma lista de Linhas
+                .WithMany(lin => lin.ListaReceitas)   // Linhas tem uma lista de Receitas
+                .Map(m =>  // esse relacionamento será mapeado em uma terceira tabela
+                {
+                    m.MapLeftKey("ReceitaId");  // chave da esquerda será de ReceitaId
+                    m.MapRightKey("LinhaId");   // chave da direita será LinhaId
+                    m.ToTable("ReceitaLinha");  // nome da tabela será ReceitaLinha
+                });
+
+
+
+c
         }
     }
 }

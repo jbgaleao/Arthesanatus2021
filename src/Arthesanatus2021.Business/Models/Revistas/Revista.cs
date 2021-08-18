@@ -13,8 +13,8 @@ namespace Arthesanatus2021.Business.Models.Revistas
         public string Tema { get; set; }
         public string Foto { get; set; }
 
-        /* EF RELATIONS */
-        public ICollection<Receita> Receitas { get; set; }
+        /* EF Relations */
+        public ICollection<Receita> ListaReceitas { get; set; }
 
     }
 }
