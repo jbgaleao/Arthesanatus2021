@@ -35,19 +35,17 @@ namespace Arthesanatus2021.Infra.Data.Mappings
                 .WithMany(rev => rev.ListaReceitas)
                 .HasForeignKey(rec => rec.RevistaId);
 
-            
+
             HasMany(rec => rec.ListaLinhas)     // Receita tem uma lista de Linhas
                 .WithMany(lin => lin.ListaReceitas)   // Linhas tem uma lista de Receitas
                 .Map(m =>  // esse relacionamento será mapeado em uma terceira tabela
                 {
                     m.MapLeftKey("ReceitaId");  // chave da esquerda será de ReceitaId
                     m.MapRightKey("LinhaId");   // chave da direita será LinhaId
-                    m.ToTable("ReceitaLinha");  // nome da tabela será ReceitaLinha
+                    m.ToTable("RECEITA_LINHA");  // nome da tabela será ReceitaLinha
                 });
 
-
-
-c
+            ToTable("RECEITAS");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Arthesanatus2021.Business.Models.Receitas;
+﻿using Arthesanatus2021.Business.Models.Cores;
+using Arthesanatus2021.Business.Models.Linhas;
+using Arthesanatus2021.Business.Models.Receitas;
 using Arthesanatus2021.Business.Models.Revistas;
 using Arthesanatus2021.Infra.Data.Mappings;
 
@@ -17,6 +19,9 @@ namespace Arthesanatus2021.Infra.Data.Context
 
         public DbSet<Revista> REVISTAS { get; set; }
         public DbSet<Receita> RECEITAS { get; set; }
+        public DbSet<Linha> LINHAS { get; set; }
+        public DbSet<Cor> CORES { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,7 +31,9 @@ namespace Arthesanatus2021.Infra.Data.Context
 
             modelBuilder.Configurations.Add(new RevistaMap());
             modelBuilder.Configurations.Add(new ReceitaMap());
-            
+            modelBuilder.Configurations.Add(new LinhaMap());
+            modelBuilder.Configurations.Add(new CorMap());
+
             base.OnModelCreating(modelBuilder);
         }
     }
