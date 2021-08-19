@@ -2,6 +2,7 @@
 
 using Arthesanatus2021.Business.Core.Models;
 using Arthesanatus2021.Business.Models.Cores;
+using Arthesanatus2021.Business.Models.Estoques;
 using Arthesanatus2021.Business.Models.Receitas;
 
 namespace Arthesanatus2021.Business.Models.Linhas
@@ -16,6 +17,7 @@ namespace Arthesanatus2021.Business.Models.Linhas
         /* EF Relations */
         public ICollection<Receita> ListaReceitas { get; set; }
         public ICollection<Cor> ListaCores { get; set; }
+        public ICollection<Estoque> ListaEstoques { get; set; }
 
     }
 }

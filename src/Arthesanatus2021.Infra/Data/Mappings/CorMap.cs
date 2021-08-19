@@ -18,28 +18,15 @@ namespace Arthesanatus2021.Infra.Data.Mappings
             Property(cor => cor.CorCodigo)
                 .IsRequired()
                 .HasColumnName("CorCodigo")
-                .HasColumnOrder(2)
+                .HasColumnOrder(1)
                 .HasColumnType("int");
 
             Property(cor => cor.Nome)
                 .IsRequired()
                 .HasColumnName("Nome")
-                .HasColumnOrder(3)
+                .HasColumnOrder(2)
                 .HasColumnType("varchar")
                 .HasMaxLength(150);
-
-            Property(cor => cor.QtdAberta)
-                .IsRequired()
-                .HasColumnName("QdtAberta")
-                .HasColumnOrder(4)
-                .HasColumnType("int");
-
-            Property(cor => cor.QtdFechada)
-                .IsRequired()
-                .HasColumnName("QtdFechada")
-                .HasColumnOrder(5)
-                .HasColumnType("int");
-
 
             HasRequired(cor => cor.Linha)
                 .WithMany(lin => lin.ListaCores)

@@ -32,6 +32,8 @@ namespace Arthesanatus2021.Infra.Data.Mappings
                 .HasMaxLength(4000);
 
 
+
+
             ToTable("LINHAS");
         }
     }
