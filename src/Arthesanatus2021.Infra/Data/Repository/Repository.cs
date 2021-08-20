@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 using Arthesanatus2021.Business.Core.Data;
@@ -68,9 +67,9 @@ namespace Arthesanatus2021.Infra.Data.Repository
         public async Task<int> SaveChanges()
         {
             return await Db.SaveChangesAsync();
-        }        
-        
-               
+        }
+
+
         public void Dispose()
         {
             Db?.Dispose();
