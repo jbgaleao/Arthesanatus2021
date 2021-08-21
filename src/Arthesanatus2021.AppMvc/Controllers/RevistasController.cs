@@ -24,15 +24,15 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
             var revista = new Revista()
             {
-                NumeroEdicao = 1,
-                MesEdicao = Mes.JANEIRO,
+                NumeroEdicao = 2,
+                MesEdicao = Mes.DEZEMBRO,
                 AnoEdicao = 2029,
                 Tema = "Aniversário GUANABARA",
                 Foto = "Caminho da Foto"
             };
 
             
-            await _revistaService.Atualizar(revista);
+            await _revistaService.Adicionar(revista);
 
             return new EmptyResult();
         }
