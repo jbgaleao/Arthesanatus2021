@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Models\Entity.cs" />
+    <Compile Include="Core\Services\BaseService.cs" />
     <Compile Include="Models\Cores\Cor.cs" />
     <Compile Include="Models\Cores\ICorRepository.cs" />
     <Compile Include="Models\Estoques\Estoque.cs" />
@@ -47,14 +48,18 @@
     <Compile Include="Models\Linhas\Linha.cs" />
     <Compile Include="Models\Receitas\IReceitaRepository.cs" />
     <Compile Include="Models\Receitas\Receita.cs" />
+    <Compile Include="Models\Receitas\Validations\ReceitaValidation.cs" />
     <Compile Include="Models\Revistas\IRevistaRepository.cs" />
     <Compile Include="Models\Revistas\Mes.cs" />
     <Compile Include="Models\Revistas\Revista.cs" />
+    <Compile Include="Models\Revistas\Services\IRevistaService.cs" />
+    <Compile Include="Models\Revistas\Services\RevistaService.cs" />
     <Compile Include="Models\Revistas\Validations\RevistaValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
