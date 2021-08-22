@@ -33,8 +33,8 @@ namespace Arthesanatus2021.AppMvc.ViewModels
 
 
 
-        [DisplayName("Imagem da Capa da revista")]
-        public HttpPostedFileBase ImagemUpload { get; set; }
+        //[DisplayName("Imagem da Capa da revista")]
+        //public HttpPostedFileBase ImagemUpload { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         [DisplayName("Foto")]
@@ -42,7 +42,7 @@ namespace Arthesanatus2021.AppMvc.ViewModels
 
 
 
-        public RevistaViewModel Revista { get; set; }
-        public IEnumerable<RevistaViewModel> Revistas { get; set; }
+        //public RevistaViewModel Revista { get; set; }
+        //public IEnumerable<RevistaViewModel> Revistas { get; set; }
     }
 }
