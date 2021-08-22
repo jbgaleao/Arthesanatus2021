@@ -48,6 +48,8 @@
     <Compile Include="Models\Linhas\Linha.cs" />
     <Compile Include="Models\Receitas\IReceitaRepository.cs" />
     <Compile Include="Models\Receitas\Receita.cs" />
+    <Compile Include="Models\Receitas\Services\IReceitaService.cs" />
+    <Compile Include="Models\Receitas\Services\ReceitaService.cs" />
     <Compile Include="Models\Receitas\Validations\ReceitaValidation.cs" />
     <Compile Include="Models\Revistas\IRevistaRepository.cs" />
     <Compile Include="Models\Revistas\Mes.cs" />
