@@ -13,6 +13,7 @@ using Arthesanatus2021.Business.Models.Receitas;
 using Arthesanatus2021.Business.Models.Receitas.Services;
 using Arthesanatus2021.Infra.Data.Repository;
 using Arthesanatus2021.Business.Core.Notificacoes;
+using AutoMapper;
 
 namespace Arthesanatus2021.AppMvc.Controllers
 {
@@ -20,24 +21,23 @@ namespace Arthesanatus2021.AppMvc.Controllers
     {
         private readonly IReceitaRepository _receitaRepository;
         private readonly IReceitaService _receitaService;
+        private readonly IMapper _mapper;
 
         public ReceitasController()
         {
-            _receitaRepository = new ReceitaRepository();
-            _receitaService = new ReceitaService(_receitaRepository, new Notificador());
+
         }
-
-
 
         public async Task<ActionResult> Index()
         {
-            return View(await _receitaRepository.ObterTodos());
+            var receitasVM = _mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterTodos());
+            return View(receitasVM);
         }
 
-        // GET: Receitas/Details/5
+
         public async Task<ActionResult> Details(Guid id)
         {
-            var receita = await _receitaRepository.ObterPorId(id);
+            var receitaViewModel = await ObterReceita(id);
 
             if (receitaViewModel == null)
             {
@@ -61,7 +61,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _receitaRepository.Adicionar(receitaViewModel);
+                await _receitaService.Adicionar(_mapper.Map<Receita>(receitaViewModel));
                 return RedirectToAction("Index");
             }
 
@@ -124,6 +124,16 @@ namespace Arthesanatus2021.AppMvc.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        private async Task<ReceitaViewModel> ObterReceita(Guid Id)
+        {
+            var receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterPorId(Id));
+            return receita;
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {
