@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Arthesanatus2021.Business.Core.Notificacoes;
 using Arthesanatus2021.Business.Core.Services;
 using Arthesanatus2021.Business.Models.Revistas.Validations;
 
@@ -14,7 +15,7 @@ namespace Arthesanatus2021.Business.Models.Revistas.Services
 
         protected readonly IRevistaRepository _revistaRepository;
 
-        public RevistaService(IRevistaRepository revistaRepository)
+        public RevistaService(IRevistaRepository revistaRepository, INotificador notificador) : base(notificador)
         {
             _revistaRepository = revistaRepository;
         }
@@ -47,9 +48,12 @@ namespace Arthesanatus2021.Business.Models.Revistas.Services
         public async Task Remover(Guid id)
         {
             var revista = await _revistaRepository.ObterPorId(id);
-            
+
             if (revista.ListaReceitas.Any())
+            {
+                Notificar("A Revista possui Receitas cadastradas!");
                 return;
+            }
 
             await _revistaRepository.Remover(id);
 
@@ -66,7 +70,14 @@ namespace Arthesanatus2021.Business.Models.Revistas.Services
                     && r.AnoEdicao == r.AnoEdicao
                     && r.MesEdicao == revista.MesEdicao);
 
-            return revistaAtual.Any();
+            if (!revistaAtual.Any())
+            {
+                return false;
+            }
+
+            Notificar("Já existe uma Revista cadastrada com esses dados!");
+
+            return true;
         }
 
         public void Dispose()

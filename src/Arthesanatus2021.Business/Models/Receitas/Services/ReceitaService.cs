@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Arthesanatus2021.Business.Core.Notificacoes;
 using Arthesanatus2021.Business.Core.Services;
 using Arthesanatus2021.Business.Models.Receitas.Validations;
 
@@ -13,7 +14,7 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
     {
         private readonly IReceitaRepository _receitaRepository;
 
-        public ReceitaService(IReceitaRepository receitaRepository)
+        public ReceitaService(IReceitaRepository receitaRepository, INotificador notificador) : base(notificador)
         {
             _receitaRepository = receitaRepository;
         }
@@ -38,7 +39,7 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
         {
             await _receitaRepository.Remover(id);
         }
-         
+
         public void Dispose()
         {
             _receitaRepository?.Dispose();
