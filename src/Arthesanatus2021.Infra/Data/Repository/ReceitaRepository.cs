@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 using Arthesanatus2021.Business.Models.Receitas;
 using Arthesanatus2021.Business.Models.Revistas;
+using Arthesanatus2021.Infra.Data.Context;
 
 namespace Arthesanatus2021.Infra.Data.Repository
 {
     public class ReceitaRepository : Repository<Receita>, IReceitaRepository
     {
+        public ReceitaRepository(Arthesanatus2021Context context) : base(context)  { }
+
         public async Task<Receita> ObterReceitaRevista(Guid id)
         {
             return await Db.RECEITAS

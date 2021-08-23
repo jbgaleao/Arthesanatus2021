@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Arthesanatus2021.Business.Models.Revistas;
+using Arthesanatus2021.Infra.Data.Context;
 
 namespace Arthesanatus2021.Infra.Data.Repository
 {
     public class RevistaRepository : Repository<Revista>, IRevistaRepository
     {
+        public RevistaRepository(Arthesanatus2021Context context) : base(context) { }
+
         public async Task<Revista> ObterRevistaPorNumEdicao(int numEdicao)
         {
             return await Db.REVISTAS

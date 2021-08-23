@@ -17,9 +17,9 @@ namespace Arthesanatus2021.Infra.Data.Repository
         protected readonly Arthesanatus2021Context Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository()
+        public Repository(Arthesanatus2021Context db)
         {
-            Db = new Arthesanatus2021Context();
+            Db = db;
             DbSet = Db.Set<TEntity>();
         }
 
