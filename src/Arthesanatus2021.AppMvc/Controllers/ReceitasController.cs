@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Arthesanatus2021.AppMvc.Models;
+
 using Arthesanatus2021.AppMvc.ViewModels;
 using Arthesanatus2021.Business.Models.Receitas;
 using Arthesanatus2021.Business.Models.Receitas.Services;
-using Arthesanatus2021.Infra.Data.Repository;
-using Arthesanatus2021.Business.Core.Notificacoes;
+
 using AutoMapper;
 
 namespace Arthesanatus2021.AppMvc.Controllers
@@ -28,13 +24,16 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         }
 
+
+        [Route("lista-de-receitas")]
         public async Task<ActionResult> Index()
         {
             var receitasVM = _mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterTodos());
             return View(receitasVM);
         }
 
-
+        [Route("dados-da-receita/{id:guid}")]
+        [HttpGet]
         public async Task<ActionResult> Details(Guid id)
         {
             var receitaViewModel = await ObterReceita(id);
@@ -46,15 +45,16 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return View(receitaViewModel);
         }
 
-        // GET: Receitas/Create
+
+
+        [Route("nova-receita")]
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Receitas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("nova-receita")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ReceitaViewModel receitaViewModel)
@@ -68,45 +68,41 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return View(receitaViewModel);
         }
 
-        // GET: Receitas/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
+
+
+        [Route("editar-receita/{id:guid}")]
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ReceitaViewModel receitaViewModel = await db.ReceitaViewModels.FindAsync(id);
+            var receitaViewModel = await ObterReceita(id);
             if (receitaViewModel == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(receitaViewModel);
         }
 
-        // POST: Receitas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("editar-receita/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,RevistaId,Nome,Descricao,Foto")] ReceitaViewModel receitaViewModel)
+        public async Task<ActionResult> Edit(ReceitaViewModel receitaViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(receitaViewModel).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+
+                await _receitaService.Atualizar(_mapper.Map<Receita>(receitaViewModel));
                 return RedirectToAction("Index");
             }
             return View(receitaViewModel);
         }
 
-        // GET: Receitas/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
+
+
+        [Route("excluir-receita/{id:guid}")]
+        [HttpGet]
+        public async Task<ActionResult> Delete(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ReceitaViewModel receitaViewModel = await db.ReceitaViewModels.FindAsync(id);
+
+            var receitaViewModel = await ObterReceita(id);
             if (receitaViewModel == null)
             {
                 return HttpNotFound();
@@ -114,16 +110,23 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return View(receitaViewModel);
         }
 
-        // POST: Receitas/Delete/5
+        [Route("excluir-receita/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            ReceitaViewModel receitaViewModel = await db.ReceitaViewModels.FindAsync(id);
-            db.ReceitaViewModels.Remove(receitaViewModel);
-            await db.SaveChangesAsync();
+            var receitaViewModel = await ObterReceita(id);
+            if (receitaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+
+            await _receitaService.Remover(id);
+
             return RedirectToAction("Index");
         }
+
+
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
         {
@@ -131,15 +134,12 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return receita;
         }
 
-
-
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _receitaRepository.Dispose();
+                _receitaService.Dispose();
             }
             base.Dispose(disposing);
         }
