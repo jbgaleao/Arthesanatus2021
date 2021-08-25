@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 
 using Arthesanatus2021.AppMvc.ViewModels;
 using Arthesanatus2021.Business.Models.Receitas;

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -19,17 +17,22 @@ namespace Arthesanatus2021.AppMvc.Controllers
         private readonly IReceitaService _receitaService;
         private readonly IMapper _mapper;
 
-        public ReceitasController()
+        public ReceitasController(IReceitaRepository receitaRepository,
+                                    IReceitaService receitaService,
+                                    IMapper mapper)
         {
-
+            _receitaRepository = receitaRepository;
+            _receitaService = receitaService;
+            _mapper = mapper;
         }
 
 
         [Route("lista-de-receitas")]
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var receitasVM = _mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterTodos());
-            return View(receitasVM);
+            return View(_mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterTodos()));
+
         }
 
         [Route("dados-da-receita/{id:guid}")]
