@@ -11,5 +11,7 @@ namespace Arthesanatus2021.Business.Models.Revistas
         Task<Revista> ObterRevistaPorNumEdicao(int numEdicao);
 
         Task<List<Revista>> ObterRevistasPorAno(int ano);
+
+        Task<List<Revista>> ObterRevistaReceitas(Guid id);
     }
 }

@@ -11,7 +11,7 @@ using AutoMapper;
 
 namespace Arthesanatus2021.AppMvc.Controllers
 {
-    public class ReceitasController : Controller
+    public class ReceitasController : BaseController
     {
         private readonly IReceitaRepository _receitaRepository;
         private readonly IReceitaService _receitaService;

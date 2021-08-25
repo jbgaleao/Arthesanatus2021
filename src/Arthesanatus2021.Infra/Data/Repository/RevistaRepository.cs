@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,5 +36,13 @@ namespace Arthesanatus2021.Infra.Data.Repository
                 .ToList();
         }
 
+        public async Task<List<Revista>> ObterRevistaReceitas(Guid id)
+        {
+            return await Db.REVISTAS
+                .AsNoTracking()
+                .Include(r => r.ListaReceitas)
+                .Where(r => r.Id == id)
+                .ToListAsync();
+        }
     }
 }
