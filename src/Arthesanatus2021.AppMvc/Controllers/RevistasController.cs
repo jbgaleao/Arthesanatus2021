@@ -35,6 +35,20 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         }
 
+
+
+
+        [Route("dados-da-revista")]
+        [HttpGet]
+        public async Task<ActionResult> Details(Guid id)
+        {
+            var revistaViewModel = await ObterRevista(id);
+            if (revistaViewModel == null)
+                return HttpNotFound();
+
+            return View(revistaViewModel);
+        }
+
         [Route("nova-revista")]
         [HttpGet]
         public ActionResult Create()
@@ -56,6 +70,8 @@ namespace Arthesanatus2021.AppMvc.Controllers
         }
 
 
+
+
         [Route("editar-revista/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
@@ -71,11 +87,11 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(Guid id, RevistaViewModel revistaViewModel)
         {
-            if (id != revistaViewModel.Id) 
+            if (id != revistaViewModel.Id)
                 return HttpNotFound();
 
-            if (!ModelState.IsValid) 
-                return View (revistaViewModel);
+            if (!ModelState.IsValid)
+                return View(revistaViewModel);
 
             var revista = _mapper.Map<Revista>(revistaViewModel);
             await _revistaService.Atualizar(revista);

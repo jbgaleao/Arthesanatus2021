@@ -269,11 +269,15 @@
     <Content Include="Views\Receitas\Details.cshtml" />
     <Content Include="Views\Receitas\Edit.cshtml" />
     <Content Include="Views\Receitas\Index.cshtml" />
+    <Content Include="Views\Revistas\Index.cshtml" />
+    <Content Include="Views\Revistas\Create.cshtml" />
+    <Content Include="Views\Revistas\Delete.cshtml" />
+    <Content Include="Views\Revistas\Details.cshtml" />
+    <Content Include="Views\Revistas\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Views\Revistas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
