@@ -76,7 +76,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var revistaViewModel = await ObterRevistaReceitas(id);
+            var revistaViewModel = await ObterRevista(id);
             if (revistaViewModel == null)
                 return HttpNotFound();
 
@@ -136,13 +136,13 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<RevistaViewModel> ObterRevista(Guid id)
         {
-            return _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterPorId(id));
+            var revista = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterPorId(id));
+            return revista;
         }
 
         private async Task<RevistaViewModel> ObterRevistaReceitas(Guid id)
         {
             return _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaReceitas(id));
         }
-
     }
 }

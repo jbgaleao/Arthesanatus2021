@@ -1,52 +1,59 @@
 ﻿@model IEnumerable<Arthesanatus2021.AppMvc.ViewModels.ReceitaViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Receitas";
 }
 
-<h2>Index</h2>
-
+<h2>@ViewBag.Title</h2>
+<hr />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a class="btn btn-info" href="@Url.Action("Create", "Receitas")">
+        Nova Receita
+    </a>
 </p>
+
 <table class="table">
-    <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.RevistaId)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Foto)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.RevistaId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-<tr>
-    @*<td>
-        @Html.DisplayFor(modelItem => item.RevistaId)
-    </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.Nome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Descricao)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Foto)
-    </td>
-    <td class="text-right">
-        <a class="btn btn-warning" href="@Url.Action("Details", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
-        <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
-        <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
-        <a class="btn btn-primary" href="@Url.Action("Revista", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-file"></span></a>
-    </td>
-</tr>
-}
-
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.RevistaId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Foto)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a class="btn btn-primary" href="@Url.Action("Revista", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

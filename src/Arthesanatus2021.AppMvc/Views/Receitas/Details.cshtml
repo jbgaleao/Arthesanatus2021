@@ -1,13 +1,13 @@
 ﻿@model Arthesanatus2021.AppMvc.ViewModels.ReceitaViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes da Receita";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>ReceitaViewModel</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -44,7 +44,9 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Receitas")"><span class="glyphicon glyphicon-home"></span></a>
+    <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = Model.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+</div>

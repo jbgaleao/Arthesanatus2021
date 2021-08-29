@@ -49,7 +49,7 @@ namespace Arthesanatus2021.Business.Models.Revistas.Services
         {
             var revista = await _revistaRepository.ObterPorId(id);
 
-            if (revista.ListaReceitas.Any())
+            if (revista.ListaReceitas != null)
             {
                 Notificar("A Revista possui Receitas cadastradas!");
                 return;

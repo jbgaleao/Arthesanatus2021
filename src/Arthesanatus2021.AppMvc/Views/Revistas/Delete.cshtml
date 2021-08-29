@@ -1,7 +1,66 @@
-﻿
+﻿@model Arthesanatus2021.AppMvc.ViewModels.RevistaViewModel
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Excluir Revista";
 }
 
-<h2>Delete</h2>
+<h2>@ViewBag.Title</h2>
+<br />
 
+<h3>Está certo de excluir a Revista?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroEdicao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumeroEdicao)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MesEdicao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MesEdicao)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnoEdicao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnoEdicao)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tema)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tema)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+    </dl>
+
+    @using(Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a class="btn btn-danger" href="@Url.Action("Delete", "Revistas", new { id = Model.Id })"><span class="glyphicon glyphicon-trash"></span></a> | 
+            <a class="btn btn-primary" href="@Url.Action("Index", "Revistas")"><span class="glyphicon glyphicon-home"></span></a>
+        </div>
+    }
+</div>

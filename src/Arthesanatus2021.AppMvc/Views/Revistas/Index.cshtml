@@ -12,53 +12,55 @@
 </p>
 
 <table class="table table-hover"
-<thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroEdicao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AnoEdicao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MesEdicao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tema)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Foto)
-        </th>
-        <th class="text-right">
-            Ações
-        </th>
-    </tr>
-</thead>
-<tbody>
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroEdicao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnoEdicao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MesEdicao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tema)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Foto)
-        </td>
-        <td class="text-right">
-            <a class="btn btn-warning" href="@Url.Action("Details", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
-            <a class="btn btn-info" href="@Url.Action("Edit", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a class="btn btn-danger" href="@Url.Action("Delete", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
-        </td>
-    </tr>
-    }
-</tbody>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroEdicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoEdicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MesEdicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tema)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th class="text-right">
+                Ações
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroEdicao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoEdicao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MesEdicao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tema)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Foto)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a class="btn btn-primary" href="@Url.Action("ListaReceita", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-list"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

@@ -1,7 +1,61 @@
-﻿
+﻿@model Arthesanatus2021.AppMvc.ViewModels.RevistaViewModel
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes da Revista";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroEdicao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumeroEdicao)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MesEdicao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MesEdicao)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnoEdicao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnoEdicao)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tema)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tema)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+    </dl>
+</div>
+
+
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Revistas")"><span class="glyphicon glyphicon-home"></span></a>
+    <a class="btn btn-info" href="@Url.Action("Edit", "Revistas", new { id = Model.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+</div>
+
 
