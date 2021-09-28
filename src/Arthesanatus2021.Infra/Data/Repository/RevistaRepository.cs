@@ -44,5 +44,12 @@ namespace Arthesanatus2021.Infra.Data.Repository
                 .Where(r => r.Id == id)
                 .ToListAsync();
         }
+
+        public async Task<Revista> ObterRevistaPorId(Guid id)
+        {
+            return await Db.REVISTAS
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
     }
 }

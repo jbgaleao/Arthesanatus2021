@@ -137,7 +137,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<RevistaViewModel> ObterRevista(Guid id)
         {
-            var revista = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterPorId(id));
+            var revista = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(id));
             return revista;
         }
 
