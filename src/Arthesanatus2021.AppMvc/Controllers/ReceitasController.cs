@@ -133,7 +133,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
         {
-            var receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterPorId(Id));
+            var receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterReceitaRevista(Id));
             return receita;
         }
 

@@ -117,6 +117,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         [Route("excluir-revista/{id:guid}")]
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
