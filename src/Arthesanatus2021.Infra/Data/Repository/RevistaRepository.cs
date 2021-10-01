@@ -17,6 +17,8 @@ namespace Arthesanatus2021.Infra.Data.Repository
         {
             return await Db.REVISTAS
                 .AsNoTracking()
+                .Include(r => r.ListaReceitas)
+                .Where(r => r.NumeroEdicao == numEdicao)
                 .FirstOrDefaultAsync(r => r.NumeroEdicao == numEdicao);
         }
 

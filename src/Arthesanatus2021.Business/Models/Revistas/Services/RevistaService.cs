@@ -47,7 +47,7 @@ namespace Arthesanatus2021.Business.Models.Revistas.Services
 
         public async Task Remover(Guid id)
         {
-            var revista = await _revistaRepository.ObterPorId(id);
+            var revista = await _revistaRepository.ObterRevistaPorId(id);
 
             if (revista.ListaReceitas != null)
             {

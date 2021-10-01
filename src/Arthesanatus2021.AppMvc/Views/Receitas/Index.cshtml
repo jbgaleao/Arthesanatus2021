@@ -51,7 +51,7 @@
                     <a class="btn btn-warning" href="@Url.Action("Details", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
                     <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
-                    <a class="btn btn-primary" href="@Url.Action("Revista", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>
+                    <a class="btn btn-primary" href="@Url.Action("RevistaRelacionada", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>
                 </td>
             </tr>
         }

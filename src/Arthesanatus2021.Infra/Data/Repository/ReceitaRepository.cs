@@ -58,7 +58,7 @@ namespace Arthesanatus2021.Infra.Data.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Receita>> ObterRevistasReceitas()
+        public async Task<IEnumerable<Receita>> ObterReceitasRevistas()
         {            
             return await Db.RECEITAS
                 .AsNoTracking()

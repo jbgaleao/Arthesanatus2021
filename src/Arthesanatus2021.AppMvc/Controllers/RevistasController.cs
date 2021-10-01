@@ -16,12 +16,15 @@ namespace Arthesanatus2021.AppMvc.Controllers
     public class RevistasController : BaseController
     {
         private readonly IRevistaRepository _revistaRepository;
+        private readonly IReceitaRepository _receitaRepository;
         private readonly IRevistaService _revistaService;
         private readonly IMapper _mapper;
 
-        public RevistasController(IRevistaRepository revistaRepository, IRevistaService revistaService, IMapper mapper)
+        public RevistasController(IRevistaRepository revistaRepository, IRevistaService revistaService,
+            IReceitaRepository receitaRepository, IMapper mapper)
         {
             _revistaRepository = revistaRepository;
+            _receitaRepository = receitaRepository;
             _revistaService = revistaService;
             _mapper = mapper;
         }
@@ -135,6 +138,25 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
 
 
+        [Route("lista-receitas-revista/{id:int}")]
+        [HttpGet]
+        public async Task<ActionResult> ListaReceitas(int id)
+        {
+            var revista = await _revistaRepository.ObterRevistaPorNumEdicao(id);
+            if (revista.ListaReceitas == null)
+            {
+                return HttpNotFound();
+            }
+            var _receitaViewModel = _mapper.Map<IEnumerable<ReceitaViewModel>>(revista.ListaReceitas);
+
+            return RedirectToAction("Index", "Receitas", _receitaViewModel);
+        }
+
+
+
+
+
+
         private async Task<RevistaViewModel> ObterRevista(Guid id)
         {
             var revista = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(id));
@@ -145,5 +167,6 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
             return _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaReceitas(id));
         }
+
     }
 }

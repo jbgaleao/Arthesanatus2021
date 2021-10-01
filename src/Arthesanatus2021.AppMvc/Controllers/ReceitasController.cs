@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Arthesanatus2021.AppMvc.ViewModels;
 using Arthesanatus2021.Business.Models.Receitas;
 using Arthesanatus2021.Business.Models.Receitas.Services;
+using Arthesanatus2021.Business.Models.Revistas;
 
 using AutoMapper;
 
@@ -14,14 +15,17 @@ namespace Arthesanatus2021.AppMvc.Controllers
     public class ReceitasController : BaseController
     {
         private readonly IReceitaRepository _receitaRepository;
+        private readonly IRevistaRepository _revistaRepository;
         private readonly IReceitaService _receitaService;
         private readonly IMapper _mapper;
 
-        public ReceitasController(IReceitaRepository receitaRepository,
+        public ReceitasController(IReceitaRepository receitaRepository, IRevistaRepository revistaRepository,
+
                                     IReceitaService receitaService,
                                     IMapper mapper)
         {
             _receitaRepository = receitaRepository;
+            _revistaRepository = revistaRepository;
             _receitaService = receitaService;
             _mapper = mapper;
         }
@@ -129,11 +133,30 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        //---------------------------------------------------------------------------------
 
+        [Route("revista-relacionada/{id:guid}")]     
+        [HttpGet]
+        public async Task<ActionResult> RevistaRelacionada(Guid id)
+        {
+            var revistaViewModel = await ObterRevista(id);
+
+            if (revistaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Details", "Revistas",revistaViewModel);
+        }
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
         {
             var receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterReceitaRevista(Id));
+            return receita;
+        }
+
+       private async Task<RevistaViewModel> ObterRevista(Guid Id)
+        {
+            var receita = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(Id));
             return receita;
         }
 
