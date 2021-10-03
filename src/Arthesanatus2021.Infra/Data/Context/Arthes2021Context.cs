@@ -10,9 +10,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Arthesanatus2021.Infra.Data.Context
 {
-    public class Arthesanatus2021Context : DbContext
+    public class Arthes2021Context : DbContext
     {
-        public Arthesanatus2021Context() : base("ArthesConnection")
+        public Arthes2021Context() : base("ArthesConn")
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
@@ -23,6 +23,7 @@ namespace Arthesanatus2021.Infra.Data.Context
         public DbSet<Linha> LINHAS { get; set; }
         public DbSet<Cor> CORES { get; set; }
         public DbSet<Estoque> ESTOQUES { get; set; }
+        public DbSet<InformacoesReceita> INFORMACOESRECEITAS { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -36,6 +37,7 @@ namespace Arthesanatus2021.Infra.Data.Context
             modelBuilder.Configurations.Add(new LinhaMap());
             modelBuilder.Configurations.Add(new CorMap());
             modelBuilder.Configurations.Add(new EstoqueMap());
+            modelBuilder.Configurations.Add(new InformacoesReceitaMap());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -12,7 +12,7 @@ namespace Arthesanatus2021.Infra.Data.Repository
 {
     public class ReceitaRepository : Repository<Receita>, IReceitaRepository
     {
-        public ReceitaRepository(Arthesanatus2021Context context) : base(context)  { }
+        public ReceitaRepository(Arthes2021Context context) : base(context)  { }
 
         public async Task<Receita> ObterReceitaRevista(Guid id)
         {

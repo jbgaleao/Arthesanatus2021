@@ -32,7 +32,7 @@ namespace Arthesanatus2021.AppMvc.App_Start
 
         private static void InitializeContainer(Container container)
         {
-            container.Register<Arthesanatus2021Context>(Lifestyle.Scoped);
+            container.Register<Arthes2021Context>(Lifestyle.Scoped);
             container.Register<IReceitaRepository, ReceitaRepository>(Lifestyle.Scoped);
             container.Register<IReceitaService, ReceitaService>(Lifestyle.Scoped);
             container.Register<IRevistaRepository, RevistaRepository>(Lifestyle.Scoped);

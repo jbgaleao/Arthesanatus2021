@@ -31,10 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FluentValidation.9.2.2\lib\net461\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Data\IRepository.cs" />
@@ -49,7 +56,10 @@
     <Compile Include="Models\Estoques\IEstoqueRepository.cs" />
     <Compile Include="Models\Linhas\ILinhaRepository.cs" />
     <Compile Include="Models\Linhas\Linha.cs" />
+    <Compile Include="Models\Receitas\IInformacoesReceita.cs" />
+    <Compile Include="Models\Receitas\InformacoesReceita.cs" />
     <Compile Include="Models\Receitas\IReceitaRepository.cs" />
+    <Compile Include="Models\Receitas\NivelDificuldade.cs" />
     <Compile Include="Models\Receitas\Receita.cs" />
     <Compile Include="Models\Receitas\Services\IReceitaService.cs" />
     <Compile Include="Models\Receitas\Services\ReceitaService.cs" />
@@ -63,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

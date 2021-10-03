@@ -13,10 +13,10 @@ namespace Arthesanatus2021.Infra.Data.Repository
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
-        protected readonly Arthesanatus2021Context Db;
+        protected readonly Arthes2021Context Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(Arthesanatus2021Context db)
+        public Repository(Arthes2021Context db)
         {
             Db = db;
             DbSet = Db.Set<TEntity>();

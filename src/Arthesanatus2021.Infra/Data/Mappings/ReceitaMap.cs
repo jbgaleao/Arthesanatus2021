@@ -31,6 +31,10 @@ namespace Arthesanatus2021.Infra.Data.Mappings
                 .HasColumnType("varchar")
                 .HasMaxLength(2000);
 
+            HasRequired(rec => rec.InformacoesReceita)
+                .WithRequiredPrincipal(r => r.Receita);
+            
+                
             HasRequired(rec => rec.Revista)
                 .WithMany(rev => rev.ListaReceitas)
                 .HasForeignKey(rec => rec.RevistaId);

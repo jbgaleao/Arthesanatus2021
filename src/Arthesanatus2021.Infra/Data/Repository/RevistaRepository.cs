@@ -11,7 +11,7 @@ namespace Arthesanatus2021.Infra.Data.Repository
 {
     public class RevistaRepository : Repository<Revista>, IRevistaRepository
     {
-        public RevistaRepository(Arthesanatus2021Context context) : base(context) { }
+        public RevistaRepository(Arthes2021Context context) : base(context) { }
 
         public async Task<Revista> ObterRevistaPorNumEdicao(int numEdicao)
         {

@@ -4,7 +4,7 @@ using System.Data.Entity.Migrations;
 
 namespace Arthesanatus2021.Infra.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<Arthesanatus2021Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<Arthes2021Context>
     {
         public Configuration()
         {

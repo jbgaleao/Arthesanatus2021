@@ -13,6 +13,7 @@ namespace Arthesanatus2021.Business.Models.Receitas
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Foto { get; set; }
+        public InformacoesReceita InformacoesReceita { get; set; }
 
 
         /* EF Relations */
