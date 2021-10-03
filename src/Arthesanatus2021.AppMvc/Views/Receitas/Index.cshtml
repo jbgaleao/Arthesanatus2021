@@ -15,9 +15,9 @@
 <table class="table">
     <thead>
         <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.RevistaId)
-                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.RevistaId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -32,12 +32,12 @@
     </thead>
 
     <tbody>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.RevistaId)
-                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.RevistaId)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
@@ -52,6 +52,7 @@
                     <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
                     <a class="btn btn-primary" href="@Url.Action("RevistaRelacionada", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>
+                    <a class="btn btn-info" href="@Url.Action("RevistaRelacionada", "Fornecedores", new {id = item.RevistaId})" data-modal=""><spam class="glyphicon glyphicon-pencil"></spam> </a>
                 </td>
             </tr>
         }

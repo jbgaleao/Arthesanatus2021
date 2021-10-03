@@ -166,6 +166,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
             {
                 _receitaRepository.Dispose();
                 _receitaService.Dispose();
+                _revistaRepository.Dispose();
             }
             base.Dispose(disposing);
         }
