@@ -56,13 +56,14 @@
     <Compile Include="Models\Estoques\IEstoqueRepository.cs" />
     <Compile Include="Models\Linhas\ILinhaRepository.cs" />
     <Compile Include="Models\Linhas\Linha.cs" />
-    <Compile Include="Models\Receitas\IInformacoesReceita.cs" />
+    <Compile Include="Models\Receitas\IInformacoesReceitaRepository.cs" />
     <Compile Include="Models\Receitas\InformacoesReceita.cs" />
     <Compile Include="Models\Receitas\IReceitaRepository.cs" />
     <Compile Include="Models\Receitas\NivelDificuldade.cs" />
     <Compile Include="Models\Receitas\Receita.cs" />
     <Compile Include="Models\Receitas\Services\IReceitaService.cs" />
     <Compile Include="Models\Receitas\Services\ReceitaService.cs" />
+    <Compile Include="Models\Receitas\Validations\InformacoesReceitaValidation.cs" />
     <Compile Include="Models\Receitas\Validations\ReceitaValidation.cs" />
     <Compile Include="Models\Revistas\IRevistaRepository.cs" />
     <Compile Include="Models\Revistas\Mes.cs" />

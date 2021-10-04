@@ -53,5 +53,7 @@ namespace Arthesanatus2021.Infra.Data.Repository
                 .AsNoTracking()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
+
+        //public async Task<Revista> Obter
     }
 }

@@ -20,6 +20,8 @@ namespace Arthesanatus2021.Business.Models.Receitas
         Task<IEnumerable<Receita>> ObterReceitasPorRevistaMesEdicaoAnoEdicao(Mes mes, int ano);
 
         Task<IEnumerable<Receita>> ObterReceitasRevistas();
+
+        Task<Receita> ObetrReceitaInformacoesReceitaPorId(Guid Id);
         
     }
 }

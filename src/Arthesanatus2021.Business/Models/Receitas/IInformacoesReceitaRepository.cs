@@ -8,8 +8,8 @@ using Arthesanatus2021.Business.Core.Data;
 
 namespace Arthesanatus2021.Business.Models.Receitas
 {
-    public interface IInformacoesReceita:IRepository<InformacoesReceita>
+    public interface IInformacoesReceitaRepository:IRepository<InformacoesReceita>
     {
-        Task<InformacoesReceita> ObterInformacoesReceitaPorReceita(Guid receitaId);
+        Task<InformacoesReceita> ObterInformacoesReceitaDeReceita(Guid receitaId);
     }
 }

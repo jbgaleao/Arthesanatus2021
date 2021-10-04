@@ -11,5 +11,7 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
         Task Adicionar(Receita receita);
         Task Atualizar(Receita receita);
         Task Remover(Guid id);
+
+        Task AtualizarInformacoesReceita(InformacoesReceita informacoesReceita);
     }
 }
