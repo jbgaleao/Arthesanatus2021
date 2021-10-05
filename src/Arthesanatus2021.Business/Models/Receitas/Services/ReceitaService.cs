@@ -15,8 +15,8 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
         private readonly IReceitaRepository _receitaRepository;
         private readonly IInformacoesReceitaRepository _informacoesreceitaRepository;
 
-        public ReceitaService(IReceitaRepository receitaRepository, 
-                              IInformacoesReceitaRepository informacoesreceitaRepository, 
+        public ReceitaService(IReceitaRepository receitaRepository,
+                              IInformacoesReceitaRepository informacoesreceitaRepository,
                               INotificador notificador) : base(notificador)
         {
             _receitaRepository = receitaRepository;
@@ -31,10 +31,11 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
             if (!ExecutarValidacao(new ReceitaValidation(), receita) ||
                 !ExecutarValidacao(new InformacoesReceitaValidation(), receita.InformacoesReceita))
                 return;
-            
-            if (await (ReceitaExistente(receita))) return;
-          
+
+            if (await ReceitaExistente(receita)) return;
+
             await _receitaRepository.Adicionar(receita);
+            await _informacoesreceitaRepository.Adicionar(receita.InformacoesReceita);
         }
 
         public async Task Atualizar(Receita receita)
@@ -45,25 +46,28 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
 
             if (await (ReceitaExistente(receita))) return;
 
-            await _receitaRepository.Atualizar(receita);
+            await _receitaRepository.Atualizar(receita);            
+            await _informacoesreceitaRepository.Atualizar(receita.InformacoesReceita);
         }
 
         public async Task Remover(Guid id)
         {
             var receita = await _receitaRepository.ObetrReceitaInformacoesReceitaPorId(id);
-            if (receita.InformacoesReceita.)
+            if (receita.InformacoesReceita != null)
             {
-
+                await _informacoesreceitaRepository.Remover(receita.InformacoesReceita.Id);
             }
             await _receitaRepository.Remover(id);
         }
 
-        public Task AtualizarInformacoesReceita(InformacoesReceita informacoesReceita)
+        public async Task AtualizarInformacoesReceita(InformacoesReceita informacoesReceita)
         {
-            throw new NotImplementedException();
-        }        
-        
-        
+            if (!ExecutarValidacao(new InformacoesReceitaValidation(), informacoesReceita)) return;
+
+            await _informacoesreceitaRepository.Atualizar(informacoesReceita);
+        }
+
+
         private async Task<bool> ReceitaExistente(Receita receita)
         {
             var receitaAtual = await _receitaRepository
@@ -75,6 +79,7 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
         public void Dispose()
         {
             _receitaRepository?.Dispose();
+            _informacoesreceitaRepository?.Dispose();
         }
 
 
