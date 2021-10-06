@@ -40,7 +40,7 @@ namespace Arthesanatus2021.AppMvc.ViewModels
         [DisplayName("Foto")]
         public string Foto { get; set; }
 
-
+        public InformacoesReceitaViewModel InformacoesRevista { get; set; }
 
         //public RevistaViewModel Revista { get; set; }
         //public IEnumerable<RevistaViewModel> Revistas { get; set; }

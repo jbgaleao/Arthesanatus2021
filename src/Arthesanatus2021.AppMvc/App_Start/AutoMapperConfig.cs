@@ -36,7 +36,7 @@ namespace Arthesanatus2021.AppMvc.App_Start
         {
             CreateMap<Revista, RevistaViewModel>().ReverseMap();
             CreateMap<Receita, ReceitaViewModel>().ReverseMap();
-
+            CreateMap<InformacoesReceita, InformacoesReceitaViewModel>().ReverseMap();
         }
     }
 }
