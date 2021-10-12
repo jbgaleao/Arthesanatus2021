@@ -43,7 +43,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(Guid id)
         {
-            var receitaViewModel = await ObterReceita(id);
+            ReceitaViewModel receitaViewModel = await ObterReceita(id);
 
             if (receitaViewModel == null)
             {
@@ -81,7 +81,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var receitaViewModel = await ObterReceita(id);
+            ReceitaViewModel receitaViewModel = await ObterReceita(id);
             if (receitaViewModel == null)
                 return HttpNotFound();
 
@@ -91,8 +91,11 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [Route("editar-receita/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ReceitaViewModel receitaViewModel)
+        public async Task<ActionResult> Edit(Guid id, ReceitaViewModel receitaViewModel)
         {
+            if (id != receitaViewModel.Id) return HttpNotFound();
+            
+
             if (ModelState.IsValid)
             {
 
@@ -109,7 +112,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
 
-            var receitaViewModel = await ObterReceita(id);
+            ReceitaViewModel receitaViewModel = await ObterReceita(id);
             if (receitaViewModel == null)
             {
                 return HttpNotFound();
@@ -122,7 +125,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            var receitaViewModel = await ObterReceita(id);
+            ReceitaViewModel receitaViewModel = await ObterReceita(id);
             if (receitaViewModel == null)
             {
                 return HttpNotFound();
@@ -139,7 +142,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> RevistaRelacionada(Guid id)
         {
-            var revistaViewModel = await ObterRevista(id);
+            RevistaViewModel revistaViewModel = await ObterRevista(id);
 
             if (revistaViewModel == null)
             {
@@ -150,13 +153,13 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
         {
-            var receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterReceitaRevista(Id));
+            ReceitaViewModel receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterReceitaRevista(Id));
             return receita;
         }
 
        private async Task<RevistaViewModel> ObterRevista(Guid Id)
         {
-            var receita = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(Id));
+            RevistaViewModel receita = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(Id));
             return receita;
         }
 

@@ -45,7 +45,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(Guid id)
         {
-            var revistaViewModel = await ObterRevista(id);
+            RevistaViewModel revistaViewModel = await ObterRevista(id);
             if (revistaViewModel == null)
                 return HttpNotFound();
 
@@ -66,7 +66,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
             if (!ModelState.IsValid)
                 return View(revistaViewModel);
 
-            var revista = _mapper.Map<Revista>(revistaViewModel);
+            Revista revista = _mapper.Map<Revista>(revistaViewModel);
             await _revistaService.Adicionar(revista);
 
             return RedirectToAction("Index");
@@ -79,7 +79,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var revistaViewModel = await ObterRevista(id);
+            RevistaViewModel revistaViewModel = await ObterRevista(id);
             if (revistaViewModel == null)
                 return HttpNotFound();
 
@@ -96,7 +96,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
             if (!ModelState.IsValid)
                 return View(revistaViewModel);
 
-            var revista = _mapper.Map<Revista>(revistaViewModel);
+            Revista revista = _mapper.Map<Revista>(revistaViewModel);
             await _revistaService.Atualizar(revista);
 
             // TODO:
@@ -111,7 +111,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id)
         {
-            var revistaViewModel = await ObterRevista(id);
+            RevistaViewModel revistaViewModel = await ObterRevista(id);
             if (revistaViewModel == null)
                 return HttpNotFound();
 
@@ -123,7 +123,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            var revistaViewModel = await ObterRevista(id);
+            RevistaViewModel revistaViewModel = await ObterRevista(id);
             if (revistaViewModel == null)
                 return HttpNotFound();
 
@@ -142,12 +142,12 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> ListaReceitas(int id)
         {
-            var revista = await _revistaRepository.ObterRevistaPorNumEdicao(id);
+            Revista revista = await _revistaRepository.ObterRevistaPorNumEdicao(id);
             if (revista.ListaReceitas == null)
             {
                 return HttpNotFound();
             }
-            var _receitaViewModel = _mapper.Map<IEnumerable<ReceitaViewModel>>(revista.ListaReceitas);
+            IEnumerable<ReceitaViewModel> _receitaViewModel = _mapper.Map<IEnumerable<ReceitaViewModel>>(revista.ListaReceitas);
 
             return RedirectToAction("Index", "Receitas", _receitaViewModel);
         }
@@ -159,7 +159,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<RevistaViewModel> ObterRevista(Guid id)
         {
-            var revista = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(id));
+            RevistaViewModel revista = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(id));
             return revista;
         }
 

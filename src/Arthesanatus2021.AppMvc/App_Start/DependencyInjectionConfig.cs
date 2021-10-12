@@ -33,15 +33,17 @@ namespace Arthesanatus2021.AppMvc.App_Start
         private static void InitializeContainer(Container container)
         {
             container.Register<Arthes2021Context>(Lifestyle.Scoped);
+
             container.Register<IReceitaRepository, ReceitaRepository>(Lifestyle.Scoped);
             container.Register<IReceitaService, ReceitaService>(Lifestyle.Scoped);
             container.Register<IRevistaRepository, RevistaRepository>(Lifestyle.Scoped);
             container.Register<IRevistaService, RevistaService>(Lifestyle.Scoped);
+            container.Register<IInformacoesReceitaRepository, InformacoesReceitaRepository>(Lifestyle.Scoped);
             container.Register<INotificador, Notificador>(Lifestyle.Scoped);
 
             container.RegisterSingleton(() => AutoMapperConfig.GetMapperConfiguration()
                                                                 .CreateMapper(container
-                                                                .GetAllInstances));
+                                                                .GetInstance));
         }
     }
 }
