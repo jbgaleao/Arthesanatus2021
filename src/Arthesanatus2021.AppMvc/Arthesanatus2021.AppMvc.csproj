@@ -276,7 +276,7 @@
     <Content Include="Views\Revistas\Delete.cshtml" />
     <Content Include="Views\Revistas\Details.cshtml" />
     <Content Include="Views\Revistas\Edit.cshtml" />
-    <Content Include="Views\Receitas\_ModalRevista.cshtml" />
+    <Content Include="Views\Receitas\_InformacoesReceita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

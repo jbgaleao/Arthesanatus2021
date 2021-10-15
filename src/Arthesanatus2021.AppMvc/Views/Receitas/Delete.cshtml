@@ -1,15 +1,15 @@
 ﻿@model Arthesanatus2021.AppMvc.ViewModels.ReceitaViewModel
 
 @{
-    ViewBag.Title = "Excluir Receita";
+    ViewBag.Title = $"Deseja realmente Excluir a Receita {Model.Nome}?";
 }
 
-<h2>@ViewBag.Title</h2>
+<h1>@ViewBag.Title</h1>
 <br />
 
 <h3>Está certo de excluir a Receita?</h3>
 <div>
-
+    <h4>Esta ação será permanente!</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
