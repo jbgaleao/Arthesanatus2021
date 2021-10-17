@@ -21,6 +21,9 @@ namespace Arthesanatus2021.AppMvc.ViewModels
         [DisplayName("Revista")]
         public Guid RevistaId { get; set; }
 
+
+
+
         [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         [DisplayName("Nome")]
         [StringLength(150, ErrorMessage = "O campo {0} deve ter até {1} caracteres!")]
@@ -42,7 +45,7 @@ namespace Arthesanatus2021.AppMvc.ViewModels
 
         public InformacoesReceitaViewModel InformacoesRevista { get; set; }
 
-        //public RevistaViewModel Revista { get; set; }
-        //public IEnumerable<RevistaViewModel> Revistas { get; set; }
+        public RevistaViewModel Revista { get; set; }
+        public IEnumerable<RevistaViewModel> Revistas { get; set; }
     }
 }

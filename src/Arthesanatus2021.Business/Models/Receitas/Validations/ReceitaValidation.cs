@@ -25,10 +25,10 @@ namespace Arthesanatus2021.Business.Models.Receitas.Validations
                 .WithMessage("Informe o caminha da {PropertyName}")
                 .MaximumLength(2000);
 
-            RuleFor(r => r.RevistaId)
-                .NotEmpty()
-                .NotNull()
-                .WithMessage("Informe o {PropertyName}");
+            //RuleFor(r => r.RevistaId)
+            //    .NotEmpty()
+            //    .NotNull()
+            //    .WithMessage("Informe o {PropertyName}");
         }
     }
 }

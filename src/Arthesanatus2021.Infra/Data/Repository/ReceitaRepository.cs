@@ -12,71 +12,23 @@ namespace Arthesanatus2021.Infra.Data.Repository
 {
     public class ReceitaRepository : Repository<Receita>, IReceitaRepository
     {
+
         public ReceitaRepository(Arthes2021Context context) : base(context) { }
 
-        public async Task<Receita> ObetrReceitaInformacoesReceitaPorId(Guid Id)
+
+        public async Task<Receita> ObterReceitaInformacoes(Guid id)
         {
             return await Db.RECEITAS.AsNoTracking()
-                .Include(info => info.InformacoesReceita)
-                .FirstOrDefaultAsync(info => info.Id == Id);
+                .Include(f => f.InformacoesReceita)
+                .FirstOrDefaultAsync(f => f.InformacoesReceita.Id == id);
         }
 
-        public async Task<Receita> ObterReceitaRevista(Guid id)
+        public async Task<Receita> ObterRevistaReceitaInformacoes(Guid id)
         {
-            return await Db.RECEITAS
-                .AsNoTracking()
-                .Include(rev => rev.Revista)
-                .Include(info => info.InformacoesReceita)
-                .FirstOrDefaultAsync(rev => rev.Id == id);
-        }
-
-        public async Task<IEnumerable<Receita>> ObterReceitasPorRevistaAnoEdicao(int ano)
-        {
-            return await Db.RECEITAS
-                .AsNoTracking()
-                .Include(r => r.Revista)
-                .Include(info => info.InformacoesReceita)
-                .Where(r => r.Revista.AnoEdicao == ano)
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<Receita>> ObterReceitasPorRevistaMesEdicao(Mes mes)
-        {
-            return await Db.RECEITAS
-                .AsNoTracking()
-                .Include(r => r.Revista)
-                .Include(info => info.InformacoesReceita)
-                .Where(r => r.Revista.MesEdicao == mes)
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<Receita>> ObterReceitasPorRevistaMesEdicaoAnoEdicao(Mes mes, int ano)
-        {
-            return await Db.RECEITAS
-                .AsNoTracking()
-                .Include(r => r.Revista)
-                .Include(info => info.InformacoesReceita)
-                .Where(r => r.Revista.MesEdicao == mes && r.Revista.AnoEdicao == ano)
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<Receita>> ObterReceitasPorRevistaNumEdicao(int numEdicao)
-        {
-            return await Db.RECEITAS
-                .AsNoTracking()
-                .Include(r => r.Revista)
-                .Include(info => info.InformacoesReceita)
-                .Where(r => r.Revista.NumeroEdicao == numEdicao)
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<Receita>> ObterReceitasRevistas()
-        {
-            return await Db.RECEITAS
-                .AsNoTracking()
-                .Include(r => r.Revista)
-                .Include(info => info.InformacoesReceita)
-                .ToListAsync();
+            return await Db.RECEITAS.AsNoTracking()
+                .Include(f => f.InformacoesReceita)
+                .Include(f => f.Revista)
+                .FirstOrDefaultAsync(f => f.Id == id);
         }
     }
 }

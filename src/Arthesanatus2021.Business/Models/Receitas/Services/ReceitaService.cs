@@ -28,6 +28,9 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
 
         public async Task Adicionar(Receita receita)
         {
+            receita.InformacoesReceita.Id = receita.Id;
+            receita.InformacoesReceita.Receita = receita;
+
             if (!ExecutarValidacao(new ReceitaValidation(), receita) ||
                 !ExecutarValidacao(new InformacoesReceitaValidation(), receita.InformacoesReceita))
                 return;
@@ -35,7 +38,7 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
             if (await ReceitaExistente(receita)) return;
 
             await _receitaRepository.Adicionar(receita);
-            await _informacoesreceitaRepository.Adicionar(receita.InformacoesReceita);
+            //await _informacoesreceitaRepository.Adicionar(receita.InformacoesReceita);
         }
 
         public async Task Atualizar(Receita receita)
