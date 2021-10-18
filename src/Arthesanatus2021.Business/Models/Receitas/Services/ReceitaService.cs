@@ -55,7 +55,7 @@ namespace Arthesanatus2021.Business.Models.Receitas.Services
 
         public async Task Remover(Guid id)
         {
-            var receita = await _receitaRepository.ObetrReceitaInformacoesReceitaPorId(id);
+            var receita = await _receitaRepository.ObterRevistaReceitaInformacoes(id);
             if (receita.InformacoesReceita != null)
             {
                 await _informacoesreceitaRepository.Remover(receita.InformacoesReceita.Id);

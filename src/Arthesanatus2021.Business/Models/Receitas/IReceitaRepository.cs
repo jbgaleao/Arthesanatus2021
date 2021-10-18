@@ -10,6 +10,7 @@ namespace Arthesanatus2021.Business.Models.Receitas
     public interface IReceitaRepository : IRepository<Receita>
     {
         Task<Receita> ObterReceitaInformacoes(Guid id);
+
         Task<Receita> ObterRevistaReceitaInformacoes(Guid id);
     }
 }

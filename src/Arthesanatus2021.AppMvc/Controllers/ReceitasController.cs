@@ -111,7 +111,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<ReceitaViewModel> ObterReceitaInformacoesReceita(Guid Id)
         {
-            ReceitaViewModel receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObetrReceitaInformacoesReceitaPorId(Id));
+            ReceitaViewModel receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterRevistaReceitaInformacoes(Id));
             return receita;
         }
 
@@ -203,7 +203,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         private async Task<ReceitaViewModel> PopularRevista(ReceitaViewModel receita)
         {
-            receita.Revista = (RevistaViewModel)_mapper.Map<IEnumerable<RevistaViewModel>>(await _revistaRepository.ObterTodos());
+            receita.Revistas = _mapper.Map<IEnumerable<RevistaViewModel>>(await _revistaRepository.ObterTodos());
             return receita;
         }
 
