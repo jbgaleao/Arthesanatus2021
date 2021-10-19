@@ -32,6 +32,7 @@ namespace Arthesanatus2021.AppMvc.ViewModels
         [Required(ErrorMessage = "O Campo {0} é obrigatório!")]
         public Mes MesEdicao { get; set; }
 
+        [Display(Name = "Tema da Revista")]
         [Required(ErrorMessage = "O Campo {0} é obrigatório!")]
         [MaxLength(150, ErrorMessage = "O Campo {0} deverá ter o máximo de {1} caracteres!")]
         public string Tema { get; set; }

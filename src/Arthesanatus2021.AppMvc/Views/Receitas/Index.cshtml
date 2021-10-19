@@ -16,7 +16,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RevistaId)
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revista.Tema)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -24,9 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -34,26 +35,27 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RevistaId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Foto)
-                </td>
-                <td class="text-right">
-                    <a class="btn btn-warning" href="@Url.Action("Details", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
-                    <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
-                    <a class="btn btn-primary" href="@Url.Action("RevistaRelacionada", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Foto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Revista.Tema)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+
+            <td class="text-right">
+                <a class="btn btn-warning" href="@Url.Action("Details", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
+                <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
+                <a class="btn btn-primary" href="@Url.Action("RevistaRelacionada", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

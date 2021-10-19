@@ -46,10 +46,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Details(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-            if (revistaViewModel == null)
-                return HttpNotFound();
-
-            return View(revistaViewModel);
+            return revistaViewModel == null ? HttpNotFound() : View(revistaViewModel);
         }
 
         [Route("nova-revista")]
@@ -64,7 +61,9 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Create(RevistaViewModel revistaViewModel)
         {
             if (!ModelState.IsValid)
-                return View(revistaViewModel);
+            {
+                return NewMethod(revistaViewModel);
+            }
 
             var revista = _mapper.Map<Revista>(revistaViewModel);
             await _revistaService.Adicionar(revista);
@@ -72,18 +71,17 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
-
-
+        private ActionResult NewMethod(RevistaViewModel revistaViewModel)
+        {
+            return View(revistaViewModel);
+        }
 
         [Route("editar-revista/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-            if (revistaViewModel == null)
-                return HttpNotFound();
-
-            return View(revistaViewModel);
+            return revistaViewModel == null ? HttpNotFound() : View(revistaViewModel);
         }
 
         [Route("editar-revista/{id:guid}")]
@@ -112,10 +110,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-            if (revistaViewModel == null)
-                return HttpNotFound();
-
-            return View(revistaViewModel);
+            return revistaViewModel == null ? HttpNotFound() : View(revistaViewModel);
         }
 
         [Route("excluir-revista/{id:guid}")]

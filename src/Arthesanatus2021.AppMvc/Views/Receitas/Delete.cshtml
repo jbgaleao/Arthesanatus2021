@@ -6,50 +6,56 @@
 
 <h2 style="font-weight:700">@ViewBag.Title </h2>
 <h4 style="font-style:italic; color:orangered;">Você tem certeza disso?</h4>
-<div>
-    <h4 style="font-style: italic; color: orangered; ">Esta ação será permanente!</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RevistaId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RevistaId)
-        </dd>
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-6">
+
+        <h4 style="font-style: italic; color: orangered; ">Esta ação será permanente!</h4>
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.RevistaId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RevistaId)
+            </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Foto)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Foto)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            <a class="btn btn-primary" href="@Url.Action("Index", "Receitas")">Página Inicial</a>
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a class="btn btn-primary" href="@Url.Action("Index", "Receitas")">Página Inicial</a>
+            </div>
+        }
+    </div>
 </div>

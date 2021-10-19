@@ -19,8 +19,8 @@ namespace Arthesanatus2021.AppMvc.Controllers
         private readonly IReceitaService _receitaService;
         private readonly IMapper _mapper;
 
-        public ReceitasController(IReceitaRepository receitaRepository, IRevistaRepository revistaRepository,
-
+        public ReceitasController(IReceitaRepository receitaRepository,
+                                    IRevistaRepository revistaRepository,
                                     IReceitaService receitaService,
                                     IMapper mapper)
         {
@@ -35,7 +35,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterTodos()));
+            return View(_mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterReceitasRevistas()));
 
         }
 
@@ -45,20 +45,17 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
             var receitaViewModel = await ObterReceita(id);
 
-            if (receitaViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(receitaViewModel);
+            return receitaViewModel == null ? HttpNotFound() : View(receitaViewModel);
         }
 
 
 
         [Route("nova-receita")]
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            ReceitaViewModel receitaViewModel = await PopularRevistas(new ReceitaViewModel());
+            return View(receitaViewModel);
         }
 
         [Route("nova-receita")]
@@ -66,6 +63,8 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ReceitaViewModel receitaViewModel)
         {
+            receitaViewModel = await PopularRevistas(receitaViewModel);
+
             if (ModelState.IsValid)
             {
                 await _receitaService.Adicionar(_mapper.Map<Receita>(receitaViewModel));
@@ -81,11 +80,8 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var receitaViewModel = await ObterReceita(id);
-            if (receitaViewModel == null)
-                return HttpNotFound();
-
-            return View(receitaViewModel);
+            ReceitaViewModel receitaViewModel = await ObterReceita(id);
+            return receitaViewModel == null ? HttpNotFound() : View(receitaViewModel);
         }
 
         [Route("editar-receita/{id:guid}")]
@@ -110,11 +106,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
 
             var receitaViewModel = await ObterReceita(id);
-            if (receitaViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(receitaViewModel);
+            return receitaViewModel == null ? HttpNotFound() : View(receitaViewModel);
         }
 
         [Route("excluir-receita/{id:guid}")]
@@ -135,28 +127,31 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         //---------------------------------------------------------------------------------
 
-        [Route("revista-relacionada/{id:guid}")]     
+        [Route("revista-relacionada/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> RevistaRelacionada(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
 
-            if (revistaViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return RedirectToAction("Details", "Revistas",revistaViewModel);
+            return revistaViewModel == null ? HttpNotFound() : RedirectToAction("Details", "Revistas", revistaViewModel);
         }
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
         {
             var receita = _mapper.Map<ReceitaViewModel>(await _receitaRepository.ObterReceitaRevista(Id));
+            receita.Revistas = _mapper.Map<IEnumerable<RevistaViewModel>>(await _revistaRepository.ObterTodos());
             return receita;
         }
 
-       private async Task<RevistaViewModel> ObterRevista(Guid Id)
+        private async Task<RevistaViewModel> ObterRevista(Guid Id)
         {
             var receita = _mapper.Map<RevistaViewModel>(await _revistaRepository.ObterRevistaPorId(Id));
+            return receita;
+        }
+
+        private async Task<ReceitaViewModel> PopularRevistas(ReceitaViewModel receita)
+        {
+            receita.Revistas = _mapper.Map<IEnumerable<RevistaViewModel>>(await _revistaRepository.ObterTodos());
             return receita;
         }
 
