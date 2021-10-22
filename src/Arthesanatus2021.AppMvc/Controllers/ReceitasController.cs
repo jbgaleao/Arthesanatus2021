@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 using Arthesanatus2021.AppMvc.ViewModels;
@@ -45,7 +47,12 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
             var receitaViewModel = await ObterReceita(id);
 
-            return receitaViewModel == null ? HttpNotFound() : View(receitaViewModel);
+            if (receitaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(receitaViewModel);
         }
 
 
@@ -64,14 +71,18 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Create(ReceitaViewModel receitaViewModel)
         {
             receitaViewModel = await PopularRevistas(receitaViewModel);
+            if (!ModelState.IsValid) { return View(receitaViewModel); }
 
-            if (ModelState.IsValid)
+            string prefixo = Guid.NewGuid() + "_";
+            if (!UploadImagem(receitaViewModel.ImagemUpload, prefixo))
             {
-                await _receitaService.Adicionar(_mapper.Map<Receita>(receitaViewModel));
-                return RedirectToAction("Index");
+                return View(receitaViewModel);
             }
 
-            return View(receitaViewModel);
+            receitaViewModel.Foto = prefixo + receitaViewModel.ImagemUpload.FileName;
+            await _receitaService.Adicionar(_mapper.Map<Receita>(receitaViewModel));
+            return RedirectToAction("Index");
+
         }
 
 
@@ -81,7 +92,11 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Edit(Guid id)
         {
             ReceitaViewModel receitaViewModel = await ObterReceita(id);
-            return receitaViewModel == null ? HttpNotFound() : View(receitaViewModel);
+            if (receitaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(receitaViewModel);
         }
 
         [Route("editar-receita/{id:guid}")]
@@ -104,9 +119,12 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id)
         {
-
             var receitaViewModel = await ObterReceita(id);
-            return receitaViewModel == null ? HttpNotFound() : View(receitaViewModel);
+            if (receitaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(receitaViewModel);
         }
 
         [Route("excluir-receita/{id:guid}")]
@@ -132,8 +150,11 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> RevistaRelacionada(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-
-            return revistaViewModel == null ? HttpNotFound() : RedirectToAction("Details", "Revistas", revistaViewModel);
+            if (revistaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Details", "Revistas", revistaViewModel);
         }
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
@@ -153,6 +174,26 @@ namespace Arthesanatus2021.AppMvc.Controllers
         {
             receita.Revistas = _mapper.Map<IEnumerable<RevistaViewModel>>(await _revistaRepository.ObterTodos());
             return receita;
+        }
+
+        private bool UploadImagem(HttpPostedFileBase img, string prefixo)
+        {
+            if (img == null || img.ContentLength <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Imagem em formato Inválido");
+                return false;
+            }
+
+            string path = Path.Combine(HttpContext.Server.MapPath("~/imagens"), prefixo + img.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com esse Nome");
+                return false;
+            }
+
+            img.SaveAs(path);
+            return true;
         }
 
         protected override void Dispose(bool disposing)

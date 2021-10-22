@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 using Arthesanatus2021.AppMvc.ViewModels;
@@ -46,8 +48,13 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Details(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-            return revistaViewModel == null ? HttpNotFound() : View(revistaViewModel);
+            if (revistaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(revistaViewModel);
         }
+
 
         [Route("nova-revista")]
         [HttpGet]
@@ -56,19 +63,43 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return View();
         }
 
+
         [Route("nova-revista")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RevistaViewModel revistaViewModel)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) { return View(revistaViewModel); }
+
+            string prefixo = Guid.NewGuid() + "_";
+            if (!UploadImagem(revistaViewModel.ImagemUpload, prefixo))
             {
-                return NewMethod(revistaViewModel);
+                return View(revistaViewModel);
+            }
+            revistaViewModel.Foto = prefixo + revistaViewModel.ImagemUpload.FileName;
+            await _revistaService.Adicionar(_mapper.Map<Revista>(revistaViewModel));
+            return RedirectToAction("Index");
+        }
+
+
+        private bool UploadImagem(HttpPostedFileBase img, string prefixo)
+        {
+            if (img == null || img.ContentLength <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Imagem em formato Inválido");
+                return false;
             }
 
-            var revista = _mapper.Map<Revista>(revistaViewModel);
-            await _revistaService.Adicionar(revista);
+            string path = Path.Combine(HttpContext.Server.MapPath("~/imagens"), prefixo + img.FileName);
 
-            return RedirectToAction("Index");
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com esse Nome");
+                return false;
+            }
+
+            img.SaveAs(path);
+            return true;
         }
 
         private ActionResult NewMethod(RevistaViewModel revistaViewModel)
@@ -81,7 +112,11 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Edit(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-            return revistaViewModel == null ? HttpNotFound() : View(revistaViewModel);
+            if (revistaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(revistaViewModel);
         }
 
         [Route("editar-revista/{id:guid}")]
@@ -110,7 +145,11 @@ namespace Arthesanatus2021.AppMvc.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var revistaViewModel = await ObterRevista(id);
-            return revistaViewModel == null ? HttpNotFound() : View(revistaViewModel);
+            if (revistaViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(revistaViewModel);
         }
 
         [Route("excluir-revista/{id:guid}")]

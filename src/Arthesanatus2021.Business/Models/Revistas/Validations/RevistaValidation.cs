@@ -28,12 +28,6 @@ namespace Arthesanatus2021.Business.Models.Revistas.Validations
                 .WithMessage("Informe o {PropertyName}")
                 .MaximumLength(150)
                 .WithMessage("O Valor do {PropertyName} deve ser menor que {ComparisonValue}");
-
-            RuleFor(r => r.Foto)
-                .NotEmpty()
-                .WithMessage("Informe o Caminho da {PropertyName}")
-                .MaximumLength(500)
-                .WithMessage("O Valor do {PropertyName} deve ser menor que {ComparisonValue}");
         }
     }
 }

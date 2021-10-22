@@ -1,52 +1,49 @@
 ﻿@model Arthesanatus2021.AppMvc.ViewModels.ReceitaViewModel
 
 @{
-    ViewBag.Title = "Detalhes da Receita";
+    ViewBag.Title = "Detalhe da Receita - " + Model.Nome;
 }
 
 <h2>@ViewBag.Title</h2>
-
-<div>
-    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RevistaId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RevistaId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-
-    </dl>
-</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/imagens/@Model.Foto" alt="@Model.Foto" style="width: 300px; height: 428px" />
+    </div>
 
 
-<div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Receitas")"><span class="glyphicon glyphicon-home"></span></a>
-    <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = Model.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Revista.Tema)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Revista.Tema)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+        </dl>
+
+
+
+        <div>
+            <a class="btn btn-primary" href="@Url.Action("Index", "Receitas")"><span class="glyphicon glyphicon-home"></span></a>
+            <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = Model.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+    </div>
 </div>

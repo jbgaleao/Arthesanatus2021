@@ -32,11 +32,10 @@ namespace Arthesanatus2021.AppMvc.ViewModels
         public string Descricao { get; set; }
 
 
-        [DisplayName("Imagem da Capa da revista")]
+        [Display(Name = "Foto da Receita")]
         public HttpPostedFileBase ImagemUpload { get; set; }
 
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         [DisplayName("Foto")]
         public string Foto { get; set; }
 
