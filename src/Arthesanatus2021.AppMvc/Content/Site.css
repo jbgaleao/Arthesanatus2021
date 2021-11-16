@@ -20,5 +20,13 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 500px;
+}
+
+/*
+    Configurações pessoais de stilos
+*/
+.imagemBorda {
+    border: 1px solid #dddddd;
+    padding: 2px;
 }

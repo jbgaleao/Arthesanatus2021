@@ -55,8 +55,6 @@ namespace Arthesanatus2021.AppMvc.Controllers
             return View(receitaViewModel);
         }
 
-
-
         [Route("nova-receita")]
         [HttpGet]
         public async Task<ActionResult> Create()
@@ -101,18 +99,36 @@ namespace Arthesanatus2021.AppMvc.Controllers
 
         [Route("editar-receita/{id:guid}")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ReceitaViewModel receitaViewModel)
+        public async Task<ActionResult> Edit(Guid id, ReceitaViewModel receitaViewModel)
         {
-            if (ModelState.IsValid)
+            if (id != receitaViewModel.Id) return HttpNotFound();
+
+            if (!ModelState.IsValid) return View(receitaViewModel);
+            ReceitaViewModel receitaAtualizacao = await ObterReceita(receitaViewModel.Id);
+            receitaAtualizacao.Revista = await ObterRevista(receitaViewModel.RevistaId);
+
+            receitaViewModel.Foto = receitaAtualizacao.Foto;
+
+            if (receitaViewModel.ImagemUpload != null)
             {
+                string imgPrefixo = Guid.NewGuid() + "_";
+                if (!UploadImagem(receitaViewModel.ImagemUpload, imgPrefixo))
+                {
+                    return View(receitaViewModel);
+                }
 
-                await _receitaService.Atualizar(_mapper.Map<Receita>(receitaViewModel));
-                return RedirectToAction("Index");
+                receitaAtualizacao.Foto = imgPrefixo + receitaViewModel.ImagemUpload.FileName;
             }
-            return View(receitaViewModel);
-        }
 
+            receitaAtualizacao.Nome = receitaViewModel.Nome;
+            receitaAtualizacao.Descricao = receitaViewModel.Descricao;
+            receitaAtualizacao.Revista = receitaViewModel.Revista;
+
+
+            await _receitaService.Atualizar(_mapper.Map<Receita>(receitaAtualizacao));
+
+            return RedirectToAction("Index");
+        }
 
 
         [Route("excluir-receita/{id:guid}")]
@@ -132,7 +148,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            var receitaViewModel = await ObterReceita(id);
+            ReceitaViewModel receitaViewModel = await ObterReceita(id);
             if (receitaViewModel == null)
             {
                 return HttpNotFound();
@@ -156,6 +172,16 @@ namespace Arthesanatus2021.AppMvc.Controllers
             }
             return RedirectToAction("Details", "Revistas", revistaViewModel);
         }
+
+        [Route("receitas-revista/{id:guid}")]
+        [HttpGet]
+        public async Task<ActionResult> ListaReceitasDaRevista(Guid id)
+        {
+            IEnumerable<ReceitaViewModel> receitas = _mapper.Map<IEnumerable<ReceitaViewModel>>(await _receitaRepository.ObterReceitasDaRevista(id));   
+            return View("ReceitasDaRevista", receitas);
+        }
+
+
 
         private async Task<ReceitaViewModel> ObterReceita(Guid Id)
         {

@@ -1,16 +1,11 @@
 ﻿@model IEnumerable<Arthesanatus2021.AppMvc.ViewModels.ReceitaViewModel>
 
 @{
-    ViewBag.Title = "Lista de Receitas";
+    ViewBag.Title = "Lista de Receitas da Revista";
 }
 
 <h2>@ViewBag.Title</h2>
 <hr />
-<p>
-    <a class="btn btn-info" href="@Url.Action("Create", "Receitas")">
-        Nova Receita
-    </a>
-</p>
 
 <table class="table">
     <thead>
@@ -37,7 +32,7 @@
         {
             <tr>
                 <td>
-                    <img class="imagemBorda" src="~/imagens/@item.Foto" alt="@item.Foto" style="width: 70px; height: 100px" />
+                    <img class="imagemBorda" src="~/imagens/@item.Foto" alt="@item.Foto" style="width: 120px; height: 160px" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Revista.Tema)
@@ -50,7 +45,6 @@
                 </td>
 
                 <td class="text-right">
-                    <a class="btn btn-warning" href="@Url.Action("Details", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
                     <a class="btn btn-info" href="@Url.Action("Edit", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
                     <a class="btn btn-primary" href="@Url.Action("RevistaRelacionada", "Receitas", new { id = item.RevistaId })"><span class="glyphicon glyphicon-list"></span></a>

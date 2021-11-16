@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Receitas", FormMethod.Post, new { enctype = "multipart/form-data", id = "receitaForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -19,7 +19,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.RevistaId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.DropDownListFor(model => model.RevistaId, new SelectList(Model.Revistas, "Id", "Tema"), string.Empty,
                new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RevistaId, "", new { @class = "text-danger" })
@@ -28,7 +28,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
             </div>
@@ -36,22 +36,41 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Foto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
+            <label class="control-label col-md-2">Imagem Atual</label><br />
+            <div class="col-md-3">
+                <img class="imagemBorda" src="~/imagens/@Model.Foto" alt="@Model.Foto" style="width: 120px; height: 160px;" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagemUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+
+                <div class="input-group">
+                    <input type="text" name="ImagemNome" id="ImagemNome" class="form-control" />
+                    <span class="input-group-btn">
+                        <label class="btn btn-primary" for="ImagemUpload">
+                            <input class="form-control" id="ImagemUpload" name="ImagemUpload" type="file" style="display: none"
+                                   onchange="$('#ImagemNome').val(this.files[0].name); $('#ImagemUpload').blur();">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                        </label>
+                    </span>
+                </div>
+
+                @Html.ValidationMessage("ImagemNome", "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-3">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>

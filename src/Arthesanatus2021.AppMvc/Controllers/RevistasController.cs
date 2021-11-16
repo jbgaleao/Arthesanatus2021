@@ -111,7 +111,7 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var revistaViewModel = await ObterRevista(id);
+            RevistaViewModel revistaViewModel = await ObterRevista(id);
             if (revistaViewModel == null)
             {
                 return HttpNotFound();
@@ -123,17 +123,31 @@ namespace Arthesanatus2021.AppMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(Guid id, RevistaViewModel revistaViewModel)
         {
-            if (id != revistaViewModel.Id)
-                return HttpNotFound();
+            if (id != revistaViewModel.Id) return HttpNotFound();
 
-            if (!ModelState.IsValid)
-                return View(revistaViewModel);
+            if (!ModelState.IsValid) return View(revistaViewModel);
+            RevistaViewModel revistaAtualizacao = await ObterRevista(revistaViewModel.Id);
 
-            var revista = _mapper.Map<Revista>(revistaViewModel);
-            await _revistaService.Atualizar(revista);
+            revistaViewModel.Foto = revistaAtualizacao.Foto;
 
-            // TODO:
-            // em caso de erro
+            if (revistaViewModel.ImagemUpload != null)
+            {
+                string imgPrefixo = Guid.NewGuid() + "_";
+                if (!UploadImagem(revistaViewModel.ImagemUpload, imgPrefixo))
+                {
+                    return View(revistaViewModel);
+                }
+
+                revistaAtualizacao.Foto = imgPrefixo + revistaViewModel.ImagemUpload.FileName;
+            }
+
+            revistaAtualizacao.NumeroEdicao = revistaViewModel.NumeroEdicao;
+            revistaAtualizacao.MesEdicao = revistaViewModel.MesEdicao;
+            revistaAtualizacao.AnoEdicao = revistaViewModel.AnoEdicao;
+            revistaAtualizacao.Tema = revistaViewModel.Tema;
+
+
+            await _revistaService.Atualizar(_mapper.Map<Revista>(revistaAtualizacao));
 
             return RedirectToAction("Index");
         }

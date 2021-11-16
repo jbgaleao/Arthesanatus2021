@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Arthesanatus2021.Business.Models.Receitas;
 using Arthesanatus2021.Business.Models.Revistas;
 using Arthesanatus2021.Infra.Data.Context;
 
@@ -53,5 +54,6 @@ namespace Arthesanatus2021.Infra.Data.Repository
                 .AsNoTracking()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
+
     }
 }

@@ -41,7 +41,7 @@
         {
         <tr>
             <td>
-                <img src="~/imagens/@item.Foto" alt="@item.Foto" style="width: 70px; height: 100px" />
+                <img class="imagemBorda" src="~/imagens/@item.Foto" alt="@item.Foto" style="width: 70px; height: 100px" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumeroEdicao)
@@ -60,7 +60,7 @@
                 <a class="btn btn-warning" href="@Url.Action("Details", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-search"></span></a>
                 <a class="btn btn-info" href="@Url.Action("Edit", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a class="btn btn-danger" href="@Url.Action("Delete", "Revistas", new { id = item.Id })"><span class="glyphicon glyphicon-trash"></span></a>
-                <a class="btn btn-primary" href="@Url.Action("ListaReceitas", "Revistas", new { id = item.NumeroEdicao })"><span class="glyphicon glyphicon-list"></span></a>
+                <a class="btn btn-primary" href="@Url.Action("ListaReceitasDaRevista", "Receitas", new { id = item.Id })"><span class="glyphicon glyphicon-list"></span></a>
             </td>
         </tr>
         }

@@ -12,7 +12,7 @@ namespace Arthesanatus2021.Infra.Data.Repository
 {
     public class ReceitaRepository : Repository<Receita>, IReceitaRepository
     {
-        public ReceitaRepository(Arthesanatus2021Context context) : base(context)  { }
+        public ReceitaRepository(Arthesanatus2021Context context) : base(context) { }
 
         public async Task<Receita> ObterReceitaRevista(Guid id)
         {
@@ -20,6 +20,15 @@ namespace Arthesanatus2021.Infra.Data.Repository
                 .AsNoTracking()
                 .Include(r => r.Revista)
                 .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<IEnumerable<Receita>> ObterReceitasDaRevista(Guid id)
+        {
+            return await Db.RECEITAS
+                 .AsNoTracking()
+                 .Include(r => r.Revista)
+                 .Where(r => r.Revista.Id == id)
+                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Receita>> ObterReceitasPorRevistaAnoEdicao(int ano)
@@ -59,11 +68,13 @@ namespace Arthesanatus2021.Infra.Data.Repository
         }
 
         public async Task<IEnumerable<Receita>> ObterReceitasRevistas()
-        {            
+        {
             return await Db.RECEITAS
                 .AsNoTracking()
                 .Include(r => r.Revista)
                 .ToListAsync();
         }
+
+
     }
 }
