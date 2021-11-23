@@ -58,6 +58,7 @@
     <Compile Include="Data\Mappings\ReceitaMap.cs" />
     <Compile Include="Data\Mappings\RevistaMap.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
+    <Compile Include="Data\Repository\LinhaRepository.cs" />
     <Compile Include="Data\Repository\ReceitaRepository.cs" />
     <Compile Include="Data\Repository\Repository.cs" />
     <Compile Include="Data\Repository\RevistaRepository.cs" />

@@ -9,7 +9,6 @@ namespace Arthesanatus2021.Business.Models.Linhas
 {
     public interface ILinhaRepository : IRepository<Linha>
     {
-        Task<IEnumerable<Linha>> ObterLinhasPorReceita(Guid receitaId);
-        Task<IEnumerable<Linha>> ObterLinhasPorCor(Guid corId);
+        Task<IEnumerable<Linha>> ObterLinhasCorEstoque(Guid linhaId);
     }
 }
